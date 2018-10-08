@@ -185,6 +185,10 @@
     <Compile Include="Migrations\201810081326261_AddGenreAndGigTable1.Designer.cs">
       <DependentUpon>201810081326261_AddGenreAndGigTable1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810081349387_ovvrrideconventionforgigandgenre.cs" />
+    <Compile Include="Migrations\201810081349387_ovvrrideconventionforgigandgenre.Designer.cs">
+      <DependentUpon>201810081349387_ovvrrideconventionforgigandgenre.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -271,6 +275,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810081326261_AddGenreAndGigTable1.resx">
       <DependentUpon>201810081326261_AddGenreAndGigTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810081349387_ovvrrideconventionforgigandgenre.resx">
+      <DependentUpon>201810081349387_ovvrrideconventionforgigandgenre.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
