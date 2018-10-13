@@ -11,8 +11,11 @@ namespace GigHub.Models
         public int Id { get; set; }
 
         // Who is making the gig
-        [Required]
         public ApplicationUser Artist { get; set; }
+
+
+        [Required]
+        public string ArtistId { get; set; }
 
         //When the gig is made
         public DateTime DateTime { get; set; }
@@ -20,9 +23,12 @@ namespace GigHub.Models
         [StringLength(250)]
         //Where the gig is hapenning
         public string Venue { get; set; }
-        [Required]
         //What genre it is
         public Genre Genre { get; set; }
+
+
+        [Required]
+        public byte GenreId { get; set; }
 
     }
 }
