@@ -29,18 +29,23 @@ namespace GigHub.Controllers
         }
         [Authorize]
         [HttpPost]
-        public ActionResult Create(GigFormViewModel model)
+        public ActionResult Create(GigFormViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                viewModel.Genres = _context.Genres.ToList();
+                return View("Create", viewModel);
+            }
             var gig = new Gig
             {
                 ArtistId = User.Identity.GetUserId(),
-                DateTime = model.Datetime,
-                GenreId = model.Genre,
-                Venue = model.Venue
+                DateTime = viewModel.GetDatetime(),
+                GenreId = viewModel.Genre,
+                Venue = viewModel.Venue
             };
 
             _context.Gigs.Add(gig);
-            _context.SaveChanges();
+            _context.SaveChanges(); 
             return RedirectToAction("Index", "Home");
         }
     }
