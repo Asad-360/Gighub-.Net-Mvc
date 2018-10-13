@@ -31,10 +31,6 @@ namespace GigHub.Controllers
         [HttpPost]
         public ActionResult Create(GigFormViewModel model)
         {
-            // we dont need this extra lines because it cousing extraround trip to the database
-            // i-e extra queries.
-            //var artist = _context.Users.Single(g => g.Id == User.Identity.GetUserId());
-            //var genre = _context.Genres.Single(g => g.Id == model.Genre);
             var gig = new Gig
             {
                 ArtistId = User.Identity.GetUserId(),
