@@ -198,6 +198,10 @@
     <Compile Include="Migrations\201810130518246_AddPropertiesToGigClass.Designer.cs">
       <DependentUpon>201810130518246_AddPropertiesToGigClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810141054306_AddNameFieldToUsersTable.cs" />
+    <Compile Include="Migrations\201810141054306_AddNameFieldToUsersTable.Designer.cs">
+      <DependentUpon>201810141054306_AddNameFieldToUsersTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -297,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810130518246_AddPropertiesToGigClass.resx">
       <DependentUpon>201810130518246_AddPropertiesToGigClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810141054306_AddNameFieldToUsersTable.resx">
+      <DependentUpon>201810141054306_AddNameFieldToUsersTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
