@@ -26,6 +26,7 @@ namespace GigHub.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Attendence>().HasRequired(a => a.Gig).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Following>().HasRequired(f => f.Artist).WithMany().WillCascadeOnDelete(false);
             base.OnModelCreating(modelBuilder);
         }
     }
