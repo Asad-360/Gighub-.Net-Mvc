@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -48,6 +49,26 @@ namespace GigHub.Controllers
             _context.Gigs.Add(gig);
             _context.SaveChanges(); 
             return RedirectToAction("Index", "Home");
+        }
+
+
+        public ActionResult Attending()
+        {
+            // get the user id
+            var userId = User.Identity.GetUserId();
+            // select the gigs based on the user id
+            var gigs = _context.Attendences
+                .Where(g => g.AttendeeId == userId)
+                
+                .Select(a => a.Gig).Include(g=>g.Genre).Include(g=>g.Artist).ToList();
+
+            var viewModel = new GigsViewModel
+            {
+                ShowActions = User.Identity.IsAuthenticated,
+                UpcomingGigs =  gigs,
+                Heading = "Gigs I'm Attending"
+            };
+            return View("Gigs",viewModel);
         }
     }
 }
