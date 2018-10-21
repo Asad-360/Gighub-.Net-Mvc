@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 80px;
     padding-bottom: 20px;
+    font-size: 17px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -66,9 +67,7 @@ span.field-validation-error {
         font-size: 15px;
     }
 
-body {
-    font-size: 17px;
-}
+
 
 body,
 h1,
@@ -95,7 +94,7 @@ h6,
 
 .form-control {
     font-size: 17px;
-    padding: 20px 10px;
+    height: 44px;
     -ms-border-radius: 9px;
     border-radius: 9px;
 }
@@ -160,7 +159,7 @@ h2 {
             border-radius: 8px;
         }
 
-            .gigs > li .date .month {
+.gigs > li .date .month {
                 text-transform: uppercase;
                 font-size: 14px;
                 font-weight: bold;
@@ -180,12 +179,6 @@ h2 {
             left: 100px;
         }
 
-        .gigs > li .details {
-            position: absolute;
-            top: 0;
-            left: 100px;
-        }
-
             .gigs > li .details .artist {
                 font-weight: bold;
                 display: block;
@@ -194,4 +187,14 @@ h2 {
             .gigs > li .details .genre {
                 font-size: 15px;
                 color: darkgrey;
+            }
+
+        .gigs > li .actions {
+            font-size: 15px;
+            display: none;
+
+        }
+
+            .gigs > li:hover .actions {
+                display: block;
             }
