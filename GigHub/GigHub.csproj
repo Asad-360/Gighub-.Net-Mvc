@@ -181,9 +181,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\AttendencesController.cs" />
+    <Compile Include="Controllers\Api\FollowingsController.cs" />
+    <Compile Include="Controllers\Api\GigsController.cs" />
     <Compile Include="Controllers\ArtistController.cs" />
-    <Compile Include="Controllers\AttendencesController.cs" />
-    <Compile Include="Controllers\FollowingsController.cs" />
     <Compile Include="Dtos\AttendencesDto.cs" />
     <Compile Include="Controllers\GigsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -232,6 +233,10 @@
     <Compile Include="Migrations\201810190447497_AddFollowingsModelToDb1.Designer.cs">
       <DependentUpon>201810190447497_AddFollowingsModelToDb1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810210455032_AddIsCanceled.cs" />
+    <Compile Include="Migrations\201810210455032_AddIsCanceled.Designer.cs">
+      <DependentUpon>201810210455032_AddIsCanceled.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Attendence.cs" />
@@ -264,6 +269,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -357,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810190447497_AddFollowingsModelToDb1.resx">
       <DependentUpon>201810190447497_AddFollowingsModelToDb1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810210455032_AddIsCanceled.resx">
+      <DependentUpon>201810210455032_AddIsCanceled.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -8,6 +8,9 @@ namespace GigHub.Models
 {
     public class Gig
     {
+        //for logical delete
+        public bool IsCanceled { get; set; }
+
         public int Id { get; set; }
 
         // Who is making the gig

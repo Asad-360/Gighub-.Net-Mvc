@@ -1,15 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Web.Http;
-using System.Web.UI.WebControls;
 using GigHub.Dtos;
 using GigHub.Models;
-using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
 
-namespace GigHub.Controllers
+namespace GigHub.Controllers.Api
 {
 
 
