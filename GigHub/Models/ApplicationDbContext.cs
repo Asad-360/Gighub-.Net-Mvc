@@ -13,6 +13,10 @@ namespace GigHub.Models
 
         public DbSet<Following> Followings { get; set; }
 
+
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<UserNotification> UserNotifications { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -25,9 +29,22 @@ namespace GigHub.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Attendence>().HasRequired(a => a.Gig).WithMany().WillCascadeOnDelete(false);
-            modelBuilder.Entity<ApplicationUser>().HasMany(f => f.Followers).WithRequired(f=>f.Followee).WillCascadeOnDelete(false);
-            modelBuilder.Entity<ApplicationUser>().HasMany(f => f.Followees).WithRequired(f=>f.Follower).WillCascadeOnDelete(false);
+            // each attendence has one gig and each gig has many attendences
+            modelBuilder.Entity<Attendence>()
+                .HasRequired(a => a.Gig)
+                .WithMany(g=>g.Attendences)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ApplicationUser>().HasMany(f => f.Followers).WithRequired(f => f.Followee)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<ApplicationUser>().HasMany(f => f.Followees).WithRequired(f => f.Follower)
+                .WillCascadeOnDelete(false);
+
+
+            modelBuilder.Entity<UserNotification>()
+                .HasRequired(n => n.User)
+                .WithMany(u=>u.UserNotifications)
+                .WillCascadeOnDelete(false);
             base.OnModelCreating(modelBuilder);
         }
     }
