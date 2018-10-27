@@ -53,10 +53,13 @@ span.field-validation-error {
     margin-top: 80px;
 }
 /*Bootstrap overrides*/
+
 .navbar-inverse {
     background-color: #ff4342;
     border-color: #ff4342;
 }
+
+
 
     .navbar-inverse .navbar-brand {
         color: #ffffff;
@@ -66,6 +69,8 @@ span.field-validation-error {
         color: #ffffff;
         font-size: 15px;
     }
+
+ 
 
 
 
@@ -159,7 +164,7 @@ h2 {
             border-radius: 8px;
         }
 
-.gigs > li .date .month {
+            .gigs > li .date .month {
                 text-transform: uppercase;
                 font-size: 14px;
                 font-weight: bold;
@@ -192,9 +197,21 @@ h2 {
         .gigs > li .actions {
             font-size: 15px;
             display: none;
-
         }
 
-            .gigs > li:hover .actions {
-                display: block;
-            }
+        .gigs > li:hover .actions {
+            display: block;
+        }
+
+
+
+.notifications {
+    position: relative;
+}
+
+.notifications .badge {
+    position: absolute;
+    top: 5px;
+    right: 1px;
+    background-color: #a80a0a;
+}
