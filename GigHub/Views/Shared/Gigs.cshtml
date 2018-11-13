@@ -1,10 +1,21 @@
-﻿
-@using System.ComponentModel
+﻿@using System.ComponentModel
+@using System.Web.UI.WebControls
 @model GigHub.ViewModels.GigsViewModel
 @{
     ViewBag.Title = "Home Page";
 }
 <h1>@Model.Heading</h1>
+@using (Html.BeginForm("Search", "Gigs"))
+{
+    <div class="form-group">
+        <div id="search-gigs" style="width: 300px" class="input-group">
+            @Html.TextBoxFor(m => m.SearchTerm, new {@class = "form-control", @placeholder = "Search by name, genre , venue"})
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-search"></i>
+            </span>
+        </div>
+    </div>
+}
 <ul class="gigs voffset4">
     @foreach (var gig in Model.UpcomingGigs)
     {
@@ -19,9 +30,9 @@
             </div>
             <div class="details">
                 <span class="artist">
-                    @gig.Artist.Name
+                    @Html.ActionLink(gig.Artist.Name, "Details", "Gigs", new {gig.Id}, null)
                     @if (gig.IsCanceled)
-                       {
+                    {
                         <span class="label label-warning">Canceled</span>
                     }
 
@@ -29,7 +40,7 @@
                     {
                         <button data-following-id="@gig.ArtistId" class="btn btn-link js-toggle-following">Follow</button>
                     }
-                    
+
                 </span>
 
                 <span class="genre">
@@ -37,9 +48,9 @@
                 </span>
                 @if (Model.ShowActions && !gig.IsCanceled)
                 {
-                    <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendence">Going?</button>
+                    <button data-gig-id="@gig.Id" class="btn @(Model.Attendences.Contains(gig.Id) ? "btn-info" : "btn-default") btn-sm pull-right js-toggle-attendence">Going?</button>
                 }
-                
+
             </div>
         </li>
     }
@@ -50,39 +61,49 @@
 {
     <script>
         $(document).ready(function() {
-            
+
             $(".js-toggle-attendence").click(function(e) {
                 var button = $(e.target);
-                $.post("/api/attendences", { GigId: button.attr("data-gig-id") }).done(function ()
-                {
-                button
-                    .removeClass("btn-default")
-                    .addClass("btn-info")
-                    .text("Going");
-                })
-                    .fail(function () {
-                alert("Something unexpected happens");
-            });
+                if (button.hasClass("btn-default")) {
+                    $.post("/api/attendences", { GigId: button.attr("data-gig-id") }).done(function() {
+                            button
+                                .removeClass("btn-default")
+                                .addClass("btn-info")
+                                .text("Going");
+                        })
+                        .fail(function() {
+                            alert("Something unexpected happens");
+                        });
+                } else {
+                    $.ajax({
+                        url: "/api/attendences/" + button.attr("data-gig-id"),
+                        method: "DELETE"
+                    }).done(function() {
+                        button
+                            .removeClass("btn-info")
+                            .addClass("btn-default")
+                            .text("Going?");
+                    }).fail(function() {
+                        alert("something unexpected happens!");
+                    });
+                }
 
             });
 
 
-
-            $(".js-toggle-following").click(function (e) {
+            $(".js-toggle-following").click(function(e) {
                 var button = $(e.target);
                 alert('Ths follower Id =' + button.attr("data-following-id"));
-                $.post("/api/followings", { followeeId: button.attr("data-following-id") }).done(function ()
-                {
-                   
-                button
-                    .text("Followings");
-            }).fail(function() {
-                alert("Something unexpected happens");
+                $.post("/api/followings", { followeeId: button.attr("data-following-id") }).done(function() {
+
+                    button
+                        .text("Followings");
+                }).fail(function() {
+                    alert("Something unexpected happens");
+                });
             });
-            });
 
 
-
-    });
+        });
     </script>
 }

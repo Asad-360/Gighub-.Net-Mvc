@@ -4,6 +4,11 @@
     font-size: 17px;
 }
 
+#search-gigs {
+    width: 300px;
+}
+   
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -54,6 +59,11 @@ span.field-validation-error {
 }
 /*Bootstrap overrides*/
 
+.popover {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
 .navbar-inverse {
     background-color: #ff4342;
     border-color: #ff4342;
@@ -61,16 +71,16 @@ span.field-validation-error {
 
 
 
-    .navbar-inverse .navbar-brand {
-        color: #ffffff;
-    }
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+}
 
-    .navbar-inverse .navbar-nav > li > a {
-        color: #ffffff;
-        font-size: 15px;
-    }
+.navbar-inverse .navbar-nav > li > a {
+    color: #ffffff;
+    font-size: 15px;
+}
 
- 
+
 
 
 
@@ -104,15 +114,16 @@ h6,
     border-radius: 9px;
 }
 
-    .form-control:focus {
-        border-color: #2196f3;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-    }
+.form-control:focus {
+    border-color: #2196f3;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
 
 .btn {
     /*font-size: 17px;
     padding: 7px 20px;*/
+    -moz-border-radius: 9px;
     -ms-border-radius: 9px;
     border-radius: 9px;
 }
@@ -150,58 +161,58 @@ h2 {
     list-style: none;
 }
 
-    .gigs > li {
-        position: relative;
-        margin-bottom: 30px;
-    }
+.gigs > li {
+    position: relative;
+    margin-bottom: 30px;
+}
 
-        .gigs > li .date {
-            background: red;
-            color: white;
-            text-align: center;
-            width: 60px;
-            -ms-border-radius: 8px;
-            border-radius: 8px;
-        }
+.gigs > li .date {
+    background: red;
+    color: white;
+    text-align: center;
+    width: 60px;
+    -ms-border-radius: 8px;
+    border-radius: 8px;
+}
 
-            .gigs > li .date .month {
-                text-transform: uppercase;
-                font-size: 14px;
-                font-weight: bold;
-                padding: 3px 6px;
-            }
+.gigs > li .date .month {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 6px;
+}
 
-            .gigs > li .date .day {
-                background: #f7f7f7;
-                color: #333;
-                font-size: 20px;
-                padding: 7px 6px;
-            }
+.gigs > li .date .day {
+    background: #f7f7f7;
+    color: #333;
+    font-size: 20px;
+    padding: 7px 6px;
+}
 
-        .gigs > li .details {
-            position: absolute;
-            top: 0;
-            left: 100px;
-        }
+.gigs > li .details {
+    position: absolute;
+    top: 0;
+    left: 100px;
+}
 
-            .gigs > li .details .artist {
-                font-weight: bold;
-                display: block;
-            }
+.gigs > li .details .artist {
+    font-weight: bold;
+    display: block;
+}
 
-            .gigs > li .details .genre {
-                font-size: 15px;
-                color: darkgrey;
-            }
+.gigs > li .details .genre {
+    font-size: 15px;
+    color: darkgrey;
+}
 
-        .gigs > li .actions {
-            font-size: 15px;
-            display: none;
-        }
+.gigs > li .actions {
+    font-size: 15px;
+    display: none;
+}
 
-        .gigs > li:hover .actions {
-            display: block;
-        }
+.gigs > li:hover .actions {
+    display: block;
+}
 
 
 
@@ -215,3 +226,26 @@ h2 {
     right: 1px;
     background-color: #a80a0a;
 }
+
+
+
+.popover-notifications .popover-content {
+  padding: 0;
+}
+.popover-notifications ul.notifications {
+  list-style: none;
+  padding-left: 0;
+}
+.popover-notifications ul.notifications > li {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+.popover-notifications ul.notifications > li:last-child {
+  border-bottom: none;
+}
+.popover-notifications ul.notifications .highlight {
+  font-weight: bold;
+}
+
+
+

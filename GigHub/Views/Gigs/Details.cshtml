@@ -1,0 +1,24 @@
+﻿@model GigHub.ViewModels.DetailsViewModel
+@{
+    ViewBag.Title = "title";
+}
+
+<h2>@Model.Gigs.Artist.Name</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    if (Model.IsFollowed)
+    {
+        <button class="btn btn-info">followed</button>
+    }
+    else
+    {
+        <button class="btn btn-default">follow</button>
+    }
+}
+<p>
+    Performing at @Model.Gigs.Venue on @Model.Gigs.DateTime.ToString("d MMM") at @Model.Gigs.DateTime.ToString("HH:MM")
+</p>
+@if (Model.IsAttending && User.Identity.IsAuthenticated)
+{
+    <p>You are attending the gig.</p>
+}
