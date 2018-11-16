@@ -4,21 +4,26 @@
 }
 
 <h2>@Model.Gigs.Artist.Name</h2>
-@if (User.Identity.IsAuthenticated)
-{
-    if (Model.IsFollowed)
+<div id="details">
+    @if (User.Identity.IsAuthenticated)
     {
-        <button class="btn btn-info">followed</button>
+        var followText = Model.IsFollowed ? "followed" : "follow";
+        <button class="btn @(Model.IsFollowed ? "btn-info" : "btn-default") js-toggle-followings" data-followings-id="@Model.Gigs.ArtistId">@followText</button>
     }
-    else
+    <p>
+        Performing at @Model.Gigs.Venue on @Model.Gigs.DateTime.ToString("d MMM") at @Model.Gigs.DateTime.ToString("HH:MM")
+    </p>
+    @if (Model.IsAttending && User.Identity.IsAuthenticated)
     {
-        <button class="btn btn-default">follow</button>
+        <p>You are attending the gig.</p>
     }
-}
-<p>
-    Performing at @Model.Gigs.Venue on @Model.Gigs.DateTime.ToString("d MMM") at @Model.Gigs.DateTime.ToString("HH:MM")
-</p>
-@if (Model.IsAttending && User.Identity.IsAuthenticated)
+</div>
+
+@section scripts
 {
-    <p>You are attending the gig.</p>
+    <script>
+        $(document).ready(function() {
+            followingController.init();
+        });
+    </script>
 }
