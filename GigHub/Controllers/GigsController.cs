@@ -14,15 +14,11 @@ namespace GigHub.Controllers
 {
     public class GigsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        private readonly UnitOfWork _unitOfWork;
-
-        public GigsController()
+        public GigsController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
-
-            _unitOfWork = new UnitOfWork(_context);
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Gigs
@@ -114,7 +110,7 @@ namespace GigHub.Controllers
             {
                 Id = gig.Id,
                 Heading = "Edit A Gig",
-                Genres = _context.Genres.ToList(),
+                Genres = new ApplicationDbContext().Genres.ToList(),
                 Time = gig.DateTime.ToString("HH:mm"),
                 Date = gig.DateTime.ToString("d MMM yyyy"),
                 Genre = gig.GenreId,

@@ -8,7 +8,7 @@ using GigHub.ViewModels;
 
 namespace GigHub.Repositories
 {
-    public class GigRepository
+    public class GigRepository : IGigRepository
     {
         private readonly ApplicationDbContext _context;
         public GigRepository(ApplicationDbContext context)

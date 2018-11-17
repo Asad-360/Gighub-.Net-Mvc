@@ -6,7 +6,7 @@ using System.Web;
 
 namespace GigHub.Repositories
 {
-    public class AttendenceRepository
+    public class AttendenceRepository : IAttendenceRepository
     {
         private readonly ApplicationDbContext _context;
         public AttendenceRepository(ApplicationDbContext context)
