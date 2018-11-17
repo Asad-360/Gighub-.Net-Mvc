@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using GigHub.Models;
 
-namespace GigHub.Dtos
+namespace GigHub.Core.Dtos
 {
     public class GigDto
     {

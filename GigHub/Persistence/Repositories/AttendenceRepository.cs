@@ -1,10 +1,10 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-    using GigHub.Models;
+using GigHub.Core.Models;
+using GigHub.Core.Repositories;
 
-namespace GigHub.Repositories
+namespace GigHub.Persistence.Repositories
 {
     public class AttendenceRepository : IAttendenceRepository
     {

@@ -1,7 +1,8 @@
 ﻿using System.Data.Entity;
+using GigHub.Core.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace GigHub.Models
+namespace GigHub.Persistence
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
 

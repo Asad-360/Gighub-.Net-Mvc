@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using GigHub.Models;
+﻿using System.Linq;
+using GigHub.Core.Models;
+using GigHub.Core.Repositories;
 
-namespace GigHub.Repositories
+namespace GigHub.Persistence.Repositories
 {
     public class FollowingRepository : IFollowingRepository
     {

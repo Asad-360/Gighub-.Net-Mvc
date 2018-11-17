@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
-using GigHub.Models;
-using GigHub.ViewModels;
+using GigHub.Core.Models;
+using GigHub.Core.Repositories;
 
-namespace GigHub.Repositories
+namespace GigHub.Persistence.Repositories
 {
     public class GigRepository : IGigRepository
     {
@@ -19,7 +18,7 @@ namespace GigHub.Repositories
         public Gig GetGigsWithAttendences(int id)
         {
             return _context.Gigs
-                .Include(g => g.Attendences.Select(a => a.Attendee))
+                .Include(g => Enumerable.Select<Attendence, ApplicationUser>(g.Attendences, a => a.Attendee))
                 .SingleOrDefault(g => g.Id ==id);
         }
 

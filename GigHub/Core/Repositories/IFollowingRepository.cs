@@ -1,6 +1,6 @@
-﻿using GigHub.Models;
+﻿using GigHub.Core.Models;
 
-namespace GigHub.Repositories
+namespace GigHub.Core.Repositories
 {
     public interface IFollowingRepository
     {
