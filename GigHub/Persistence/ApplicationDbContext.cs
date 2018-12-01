@@ -30,10 +30,23 @@ namespace GigHub.Persistence
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Gig>()
+                .Property(g => g.ArtistId)
+                .IsRequired();
+
+            modelBuilder.Entity<Gig>()
+                .Property(g => g.Venue)
+                .IsRequired()
+                .HasMaxLength(250);
+
+            modelBuilder.Entity<Gig>()
+                .Property(g => g.GenreId)
+                .IsRequired();
+
             // each attendence has one gig and each gig has many attendences
             modelBuilder.Entity<Attendence>()
                 .HasRequired(a => a.Gig)
-                .WithMany(g=>g.Attendences)
+                .WithMany(g => g.Attendences)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ApplicationUser>().HasMany(f => f.Followers).WithRequired(f => f.Followee)
@@ -44,7 +57,7 @@ namespace GigHub.Persistence
 
             modelBuilder.Entity<UserNotification>()
                 .HasRequired(n => n.User)
-                .WithMany(u=>u.UserNotifications)
+                .WithMany(u => u.UserNotifications)
                 .WillCascadeOnDelete(false);
             base.OnModelCreating(modelBuilder);
         }

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GigHub.ViewModels
+namespace GigHub.Core.ViewModels
 {
-    public class ForgotViewModel
+    public class ExternalLoginConfirmationViewModel
     {
         [Required]
         [Display(Name = "Email")]

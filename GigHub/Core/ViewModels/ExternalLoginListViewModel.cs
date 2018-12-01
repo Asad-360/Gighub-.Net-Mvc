@@ -1,4 +1,4 @@
-﻿namespace GigHub.ViewModels
+﻿namespace GigHub.Core.ViewModels
 {
     public class ExternalLoginListViewModel
     {

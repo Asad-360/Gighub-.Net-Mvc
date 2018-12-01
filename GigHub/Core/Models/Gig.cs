@@ -18,21 +18,18 @@ namespace GigHub.Core.Models
         // Who is making the gig
         public ApplicationUser Artist { get; set; }
 
-
-        [Required]
+        
         public string ArtistId { get; set; }
 
         //When the gig is made
         public DateTime DateTime { get; set; }
-        [Required]
-        [StringLength(250)]
+       
         //Where the gig is hapenning
         public string Venue { get; set; }
         //What genre it is
         public Genre Genre { get; set; }
 
 
-        [Required]
         public byte GenreId { get; set; }
 
         public ICollection<Attendence> Attendences { get;private set; }
