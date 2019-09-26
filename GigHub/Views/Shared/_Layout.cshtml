@@ -3,8 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*<meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>*@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat|Open+Sans|Pacifico" rel="stylesheet">
+    <script src="~/Scripts/pace.js" type="text/javascript"></script>
+    <link href="~/Content/flash.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -39,40 +44,54 @@
     @Scripts.Render("~/bundles/lib")
     @Scripts.Render("~/bundles/app")
     @RenderSection("scripts", required: false)
-<script type="text/x-template" id="notifications-template">
-    <ul class="notifications">
-        <%
+    <script>
+        //$('.cacheButton').click(function () {
+        //    $.ajax({
+        //        url: "",
+        //        context: document.body,
+        //        success: function (s, x) {
 
+        //            $('html[manifest=saveappoffline.appcache]').attr('content', '');
+        //            $(this).html(s);
+        //        }
+        //    });
+        //});
+    </script>
+    <script type="text/x-template" id="notifications-template">
         
-        _.each(notifications, function(notification){
-        if (notification.type == 1) { %>
-        <li><span class="highlight"><%= notification.gig.artist.name %></span> has canceled the gig at <%= notification.gig.venue %> at <%= moment(notification.gig.dateTime).format("D MMM HH:mm") %>.</li>
-        <% }
+        <ul class="notifications">
+            <%
 
-        else if (notification.type == 2) {
-        var changes = [],
-        originalValues = [],
-        newValues = [];
 
-        if (notification.originalVenue != notification.gig.venue) {
-        changes.push('venue');
-        originalValues.push(notification.originalVenue);
-        newValues.push(notification.gig.venue);
-        }
+            _.each(notifications, function(notification){
+            if (notification.type == 1) { %>
+            <li><span class="highlight"><%= notification.gig.artist.name %></span> has canceled the gig at <%= notification.gig.venue %> at <%= moment(notification.gig.dateTime).format("D MMM HH:mm") %>.</li>
+            <% }
 
-        if (notification.originalDateTime != notification.gig.dateTime) {
-        changes.push('date/time');
-        originalValues.push(moment(notification.originalDateTime).format("D MMM HH:mm"));
-        newValues.push(moment(notification.gig.dateTime).format("D MMM HH:mm"));
-        }
+            else if (notification.type == 2) {
+            var changes = [],
+            originalValues = [],
+            newValues = [];
 
-        %>
-        <li><span class="highlight"><%= notification.gig.artist.name %></span> has changed the <%= changes.join(' and ') %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/') %></li>
-        <%
-        }
-        })
-        %>
-    </ul>
+            if (notification.originalVenue != notification.gig.venue) {
+            changes.push('venue');
+            originalValues.push(notification.originalVenue);
+            newValues.push(notification.gig.venue);
+            }
+
+            if (notification.originalDateTime != notification.gig.dateTime) {
+            changes.push('date/time');
+            originalValues.push(moment(notification.originalDateTime).format("D MMM HH:mm"));
+            newValues.push(moment(notification.gig.dateTime).format("D MMM HH:mm"));
+            }
+
+            %>
+            <li><span class="highlight"><%= notification.gig.artist.name %></span> has changed the <%= changes.join(' and ') %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/') %></li>
+            <%
+            }
+            })
+            %>
+        </ul>
     </script>
     <script>
         $(document).ready(function () {
@@ -89,7 +108,7 @@
                     html: true,
                     title: "notifications",
                     content: function () {
-                       
+
                         var compiled = _.template($("#notifications-template").html());
                         var html = compiled({ notifications: notifications });
 
@@ -98,16 +117,28 @@
                     template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     placement: "bottom"
                 }).on("show.bs.popover", function () {
-                    $.post("/api/notifications/MarkAsRead").done(function() {
+                    $.post("/api/notifications/MarkAsRead").done(function () {
                         $(".js-notification-count").text("").addClass("hide");
                     });
                 });
 
             });
 
-
-
         }); // end of the document.ready function
+
+    </script>
+    <script>
+        // for composition
+        $("#div_loading").hide();
+        $('#uploadBtn').click(function () {
+            $("#div_loading").show();
+        });
+        function AjaxComplete() {
+            $("#div_loading").hide();
+        }
+        function AjaxSuccess(resp) {
+            $("#success_content > p").text(resp);
+        }
     </script>
 </body>
 </html>

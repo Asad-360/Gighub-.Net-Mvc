@@ -46,7 +46,7 @@ namespace GigHub.Persistence.Repositories
 
         public IEnumerable<Gig> GetUpcomingGigs()
         {
-            return  _context.Gigs
+            return _context.Gigs
                 .Include(g => g.Artist)
                 .Include(g => g.Genre)
                 .Where(g =>
@@ -64,6 +64,12 @@ namespace GigHub.Persistence.Repositories
                 .SingleOrDefault(g => g.Id == gigId);
         }
 
+        public Gig CancelGig(string userId, int id)
+        {
+            return _context.Gigs
+                .Include(g => g.Attendences.Select(a => a.Attendee))
+                .Single(g => g.Id == id && g.ArtistId == userId);
+        }
         public void Add(Gig gig)
         {
             _context.Gigs.Add(gig);

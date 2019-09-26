@@ -21,7 +21,10 @@ namespace GigHub.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        // GET: Gigs
+        /// <summary>
+        /// Action method to create new Gig
+        /// </summary>
+        /// <returns>Gig form View Model</returns>
         [Authorize]
         public ActionResult Create()
         {
@@ -33,6 +36,10 @@ namespace GigHub.Controllers
             return View("GigForm", viewModel);
         }
 
+        /// <summary>
+        /// Action method to create new Gig from GigformviewModel
+        /// </summary>
+        /// <returns>Redirect to Mine Page of Gig</returns>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -57,7 +64,10 @@ namespace GigHub.Controllers
             return RedirectToAction("Mine", "Gigs");
         }
 
-
+        /// <summary>
+        /// Action method to Update new Gig from GigformviewModel
+        /// </summary>
+        /// <returns>Redirect to Mine Page of Gig</returns>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -90,7 +100,10 @@ namespace GigHub.Controllers
             _unitOfWork.Complete();
             return RedirectToAction("Mine", "Gigs");
         }
-
+        /// <summary>
+        /// Action method to Edit new Gig 
+        /// </summary>
+        /// <returns>Redirect to GigForm of Gig</returns>
         [Authorize]
         public ActionResult Edit(int id)
         {
@@ -119,7 +132,10 @@ namespace GigHub.Controllers
 
             return View("GigForm", viewModel);
         }
-
+        /// <summary>
+        /// Method for attending the gig
+        /// </summary>
+        /// <returns>Gig View</returns>
         [Authorize]
         public ActionResult Attending()
         {
@@ -136,7 +152,10 @@ namespace GigHub.Controllers
             return View("Gigs", viewModel);
         }
 
-
+        /// <summary>
+        /// Method of GetUpcomingGigs by Artist
+        /// </summary>
+        /// <returns>Mine View</returns>
         [Authorize]
         public ActionResult Mine()
         {

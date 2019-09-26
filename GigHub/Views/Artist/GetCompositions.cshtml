@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<GigHub.Core.Models.Composition>
+@{
+    ViewBag.Title = "GetCompositions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GetCompositions</h2>
+@if (Model != null && Model.Count() > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+               Name
+            </th>
+            <th>
+                Audio
+            </th>          
+
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <audio controls id="audio" preload="none" controlsList="nodownload">
+                        <source src="@Url.Content(item.FilePath)" type="audio/ogg" />
+                    </audio>
+                </td>
+                @*<td>
+                    @if (item.ArtistId == User.Identity.GetUserId())
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    }
+                </td>*@
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <p>Currently Artist Haven't Produced Any Composition.</p>
+}

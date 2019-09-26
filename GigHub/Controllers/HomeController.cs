@@ -3,30 +3,29 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using System.Web.Mvc;
+using GigHub.Core;
 using GigHub.Core.Models;
 using GigHub.Core.ViewModels;
 using GigHub.Persistence;
 using GigHub.Persistence.Repositories;
 using Microsoft.AspNet.Identity;
+using System.Web.UI;
+using GigHub.Core.CustomValidation;
 
 namespace GigHub.Controllers
 {
+   [NoCache]
     public class HomeController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private readonly AttendenceRepository _attendenceRepository;
-        private readonly GigRepository _gigRepository;
-        public HomeController()
+        private readonly IUnitOfWork _unitOfWork;
+        public HomeController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
-            _attendenceRepository = new AttendenceRepository(_context);
-            _gigRepository = new GigRepository(_context);
+            this._unitOfWork = unitOfWork;
         }
-
+        [OutputCache(Duration = 60 , Location = OutputCacheLocation.Client)]
         public ActionResult Index(string query = null)
         {
-            var upcomingGigs = _gigRepository
-                .GetUpcomingGigs()
+            var upcomingGigs = _unitOfWork.Gigs.GetUpcomingGigs()
                 .Where(g=>!g.IsCanceled);
 
             if (!string.IsNullOrWhiteSpace(query))
@@ -39,7 +38,7 @@ namespace GigHub.Controllers
             string userId = User.Identity.GetUserId();
             // load the future attendences and also
             // check that it is of future:
-            var attendences = _attendenceRepository.GetFutureAttendences(userId).ToLookup(a=>a.GigId);
+            var attendences = _unitOfWork.Attendence.GetFutureAttendences(userId).ToLookup(a=>a.GigId);
             // to quickly look if we are attending the gig or not.
             var viewModel = new GigsViewModel
             {
@@ -55,7 +54,6 @@ namespace GigHub.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 

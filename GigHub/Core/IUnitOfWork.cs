@@ -8,7 +8,12 @@ namespace GigHub.Core
         IFollowingRepository Following { get; }
         IGenreRepository Genre { get; }
         IGigRepository Gigs { get; }
-
+        INotificationRepository Notification { get; }
+        IArtistRepository Artist { get; }
+        ICompositionRepository Composition { get; }
+        /// <summary>
+        /// Method to commit 
+        /// </summary>
         void Complete();
     }
 }

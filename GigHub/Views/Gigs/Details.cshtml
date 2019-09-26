@@ -1,28 +1,43 @@
-﻿@model GigHub.Core.ViewModels.DetailsViewModel
+﻿@using Microsoft.AspNet.Identity
+@model GigHub.Core.ViewModels.DetailsViewModel
 @{
     ViewBag.Title = "title";
+    var IsAttending = Model.IsAttending && User.Identity.IsAuthenticated;
 }
 
-<h2>@Model.Gigs.Artist.Name</h2>
-<div id="details">
-    @if (User.Identity.IsAuthenticated)
+<div class="gig-detail">
+    @if (IsAttending)
     {
-        var followText = Model.IsFollowed ? "followed" : "follow";
-        <button class="btn @(Model.IsFollowed ? "btn-info" : "btn-default") js-toggle-followings" data-followings-id="@Model.Gigs.ArtistId">@followText</button>
+        <span class="glyphicon glyphicon-ok gig-check"></span>
     }
-    <p>
-        Performing at @Model.Gigs.Venue on @Model.Gigs.DateTime.ToString("d MMM") at @Model.Gigs.DateTime.ToString("HH:MM")
-    </p>
-    @if (Model.IsAttending && User.Identity.IsAuthenticated)
-    {
-        <p>You are attending the gig.</p>
-    }
+    <p style="font-size: 40px; font-weight: bolder;">@Model.Gigs.Artist.Name</p>
+    <div id="details">
+        @if (User.Identity.IsAuthenticated && Model.Gigs.ArtistId != User.Identity.GetUserId())
+        {
+            var followText = Model.IsFollowed ? "followed" : "follow";
+            <button class="btn @(Model.IsFollowed ? "btn-info" : "btn-default") js-toggle-followings" data-followings-id="@Model.Gigs.ArtistId">@followText</button>
+        }
+        else
+        {
+            <p>Self Gig</p>
+        }
+        <p style="margin-top:10px;">
+            Performing at @Model.Gigs.Venue on <span class="badge badge-custom">@Model.Gigs.DateTime.ToString("d MMM") at @Model.Gigs.DateTime.ToString("HH:MM")</span>
+        </p>
+        @if (IsAttending)
+        {
+            <p>You are attending the gig.</p>
+        }
+    </div>    
+</div>
+<div style="padding: 18px 10px;">
+    @Html.ActionLink("Back To Home", "Index", "Home",null , new { @style = "color: #ca4255;" })
 </div>
 
 @section scripts
 {
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             followingController.init();
         });
     </script>

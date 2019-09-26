@@ -5,40 +5,42 @@
 }
 
 <h2>My Upcoming Gigs</h2>
-
-<ul class="gigs voffset4">
-    @foreach (var gig in Model)
-    {
-        <li>
-            <div class="date">
-                <div class="month">
-                    @gig.DateTime.ToString("MMM")
+<div class="row">
+    <div class="gigs voffset4">
+        @foreach (var gig in Model)
+        {
+        <div class="col-md-3">
+            <div class="gig-card">
+                <div class="date">
+                    <div class="month">
+                        @gig.DateTime.ToString("MMM")
+                    </div>
+                    <div class="day">
+                        @gig.DateTime.ToString("dd")
+                    </div>
                 </div>
-                <div class="day">
-                    @gig.DateTime.ToString("dd")
+
+                <div class="details">
+                    <span  class="artist">
+                        @gig.Artist.Name
+                    </span>
+                    <span class="genre">
+                        @gig.Venue
+                    </span>
+                    <div class="actions">
+                        <a href="@Url.Action("Edit", "Gigs", new {id = gig.Id})">
+                            Edit
+                        </a>|
+                        <a href="#" class="js-cancel-gig" data-gig-id="@gig.Id">
+                            Cancel
+                        </a>
+                    </div>
                 </div>
             </div>
-
-            <div class="details">
-                <span class="artist">
-                    @gig.Artist.Name
-                </span>
-                <span class="genre">
-                    @gig.Venue
-                </span>
-                <div class="actions">
-                    <a href="@Url.Action("Edit", "Gigs", new {id = gig.Id})">
-                        Edit
-                    </a>|
-                    <a href="#" class="js-cancel-gig" data-gig-id="@gig.Id">
-                        Cancel
-                    </a>
-                </div>
-            </div>
-        </li>
-    }
-</ul>
-
+        </div>
+        }
+    </div>
+</div>
 @section scripts
 {
     <script>

@@ -18,6 +18,7 @@ namespace GigHub.Core.Models
         public ICollection<Following> Followers { get; set; }
         public ICollection<Following> Followees { get; set; }
         public ICollection<UserNotification> UserNotifications { get; set; }
+        public ICollection<Composition> Compositions { get; set; }
 
         public ApplicationUser()
         {

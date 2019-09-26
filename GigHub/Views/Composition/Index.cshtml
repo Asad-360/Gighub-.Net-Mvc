@@ -1,0 +1,38 @@
+﻿@model GigHub.Core.ViewModels.CompostitionViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-3">
+        <h1 >My Compostion</h1>
+    </div>
+    <div class="col-md-9">
+        @Html.ActionLink("View Composition", "GetComposition", null, new { @class = "btn btn-warning right" })
+    </div>
+</div>
+@using (Ajax.BeginForm("UploadAudio", "Composition", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    LoadingElementId = "loader",
+    OnSuccess = "AjaxSuccess",
+    OnBegin = "AjaxBegin",
+    OnComplete = "AjaxComplete"
+}, new { enctype = "multipart/form-data" }))
+
+{
+
+    @Html.TextBoxFor(m=>m.FileName , new {@class="form-control" , @name="fileName" })
+    <br />
+    <input type="file" name="fileBase" class="btn btn-primary" />
+    <br />    
+    <input type="submit" value="Upload" id="uploadBtn" class="form-control" />
+}
+<div id="div_loading">
+    <img src="~/Content/images/ajax-loader.gif" />
+</div>
+<div style="padding: 18px 10px;">
+    @Html.ActionLink("Back To Home", "Index", "Home", null, new { @style = "color: #ca4255;" })
+</div>
+
+
